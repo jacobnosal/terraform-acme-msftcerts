@@ -2,3 +2,5 @@
 **/*.lock.hcl
 **/.terraform
 **/*.env*
+**/keys/*
+**/*.tfplan
