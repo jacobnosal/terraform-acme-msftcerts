@@ -52,5 +52,14 @@ resource "local_file" "pfx" {
 resource "local_file" "trusted_root_cert" {
   filename = "./keys/${var.dns_name}.trusted_root_cert.cer"
   # I think this issuer_pem needs to be pulled apart for the root ca?
-  content = "${acme_certificate.certificate.issuer_pem}" #${data.tlsconvert_rsa_private_key.unencrypted_rsa_private_key.output_pem}"
+  content = "${acme_certificate.certificate.issuer_pem}${data.tlsconvert_rsa_private_key.unencrypted_rsa_private_key.output_pem}"
+}
+
+resource "local_file" "issuer_pem" {
+  filename = "./keys/${var.dns_name}_issuer.pem"
+  content = "${acme_certificate.certificate.issuer_pem}"
+}
+
+data "tls_certificate" "example" {
+  url = "https://registry.terraform.io"
 }
