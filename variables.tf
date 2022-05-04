@@ -1,5 +1,5 @@
 variable "registration_email" {
-    description = "Email to register with ACME for this cert."
+  description = "Email to register with ACME for this cert."
 }
 
 variable "dns_name" {
