@@ -19,6 +19,11 @@ output "pfx" {
   sensitive = true
 }
 
+output "pfx_password" {
+  value     = acme_certificate.certificate.certificate_p12_password
+  sensitive = true
+}
+
 output "test" {
   value = chomp(trimspace(trimprefix(element(split("-----END CERTIFICATE-----", "${acme_certificate.certificate.issuer_pem}"), 0), "-----BEGIN CERTIFICATE-----")))
 }
