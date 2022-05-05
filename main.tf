@@ -62,7 +62,6 @@ resource "null_resource" "trusted_root_certificate" {
 
   provisioner "local-exec" {
     command = <<EOF
-      mkdir ./keys/csrs
       openssl req -new -sha256 -key ./keys/cert_private_key.key \
         -out ./keys/csrs/${var.dns_name}.csr \
         -subj "/C=US/ST=NE/L=Omaha/O=Ocelot Consulting/OU=Cloud Engineering/CN=${var.dns_name}"
