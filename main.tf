@@ -2,8 +2,6 @@ provider "acme" {
   server_url = "https://acme-staging-v02.api.letsencrypt.org/directory"
 }
 
-provider "tlsconvert" {}
-
 # Create the private key
 # Create the tls cert -> save to pfx
 # Use private key from that cert to create a csr
