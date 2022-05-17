@@ -1,3 +1,7 @@
+variable "acme_endpoint" {
+  default = "https://acme-v02.api.letsencrypt.org/directory" #"https://acme-staging-v02.api.letsencrypt.org/directory"
+}
+
 variable "registration_email" {
   description = "Email to register with ACME for this cert."
 }

@@ -1,5 +1,5 @@
 provider "acme" {
-  server_url = "https://acme-staging-v02.api.letsencrypt.org/directory"
+  server_url = var.acme_endpoint
 }
 
 # Create the private key
@@ -47,6 +47,16 @@ resource "local_file" "account_private_key" {
 resource "local_file" "cert_private_key" {
   filename = "./keys/cert_private_key.key"
   content = acme_certificate.certificate.private_key_pem
+}
+
+resource "local_file" "cert_pem" {
+  filename = "./keys/${var.dns_name}.crt"
+  content = "${acme_certificate.certificate.certificate_pem}"
+}
+
+resource "local_file" "fullchain_pem" {
+  filename = "./keys/${var.dns_name}.fullchain.crt"
+  content = "${acme_certificate.certificate.certificate_pem}${acme_certificate.certificate.issuer_pem}"
 }
 
 resource "local_file" "pfx" {
@@ -116,6 +126,6 @@ resource "null_resource" "trusted_root_certificate" {
 #   output_format = "PKCS#8"
 # }
 
-# data "tls_certificate" "example" {
-#   url = "https://api.jones-dev.com"
-# }
+data "tls_certificate" "example" {
+  url = "https://api.jones-dev.com"
+}

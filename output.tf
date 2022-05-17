@@ -28,6 +28,6 @@ output "test" {
   value = chomp(trimspace(trimprefix(element(split("-----END CERTIFICATE-----", "${acme_certificate.certificate.issuer_pem}"), 0), "-----BEGIN CERTIFICATE-----")))
 }
 
-# output "cert" {
-#   value = data.tls_certificate.example
-# }
+output "cert" {
+  value = data.tls_certificate.example
+}
